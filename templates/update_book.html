@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Book</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Update Book Details</h1>
+        <form action="/update_book/{{ book.id }}" method="POST" class="book-form">
+            <label for="title">Title:</label><br>
+            <input type="text" id="title" name="title" value="{{ book.title }}" required><br>
+            <label for="author">Author:</label><br>
+            <input type="text" id="author" name="author" value="{{ book.author }}" required><br>
+            <label for="isbn">ISBN:</label><br>
+            <input type="text" id="isbn" name="isbn" value="{{ book.isbn }}" required><br>
+            <label for="price">Price:</label><br>
+            <input type="text" id="price" name="price" value="{{ book.price }}" required><br><br>
+            <input type="submit" value="Update" class="submit-btn">
+        </form>
+        <a href="/" class="back-btn">Back to Home</a>
+    </div>
+</body>
+</html>
