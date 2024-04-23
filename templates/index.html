@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookstore</title>
+    <title>Bookstore Management System</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
@@ -36,7 +36,12 @@
                 {% endfor %}
             </tbody>
         </table>
-        <a href="/add_book" class="add-book-btn">Add a Book</a>
+        <div style="text-align: center;"> <!-- Center align the following link -->
+            <a href="/add_book" class="add-book-btn">Add a Book</a>
+        </div>
     </div>
+    <footer class="footer">
+        Made by Devendra Kushwaha
+    </footer>
 </body>
 </html>
