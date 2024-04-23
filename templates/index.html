@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookstore Management System</title>
+    <title>Bookstore</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Bookstore Management System</h1>
+        <h1>Bookstore</h1>
+        <form action="/" method="POST" class="search-form">
+            <input type="text" name="search_query" placeholder="Search by title, author, or ISBN" value="{{ search_query }}">
+            <button type="submit">Search</button>
+        </form>
         <table class="book-table">
             <thead>
                 <tr>
@@ -36,9 +40,7 @@
                 {% endfor %}
             </tbody>
         </table>
-        <div style="text-align: center;"> <!-- Center align the following link -->
-            <a href="/add_book" class="add-book-btn">Add a Book</a>
-        </div>
+        <a href="/add_book" class="add-book-btn">Add a Book</a>
     </div>
     <footer class="footer">
         Made by Devendra Kushwaha

@@ -18,17 +18,31 @@ def connect_to_database():
                            cursorclass=pymysql.cursors.DictCursor)
 
 # Route to display books
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    try:
-        connection = connect_to_database()
-        with connection.cursor() as cursor:
-            cursor.execute("SELECT * FROM books")
-            books = cursor.fetchall()
-        connection.close()
-        return render_template('index.html', books=books)
-    except Exception as e:
-        return f"An error occurred: {e}"
+    if request.method == 'POST':
+        search_query = request.form.get('search_query')
+        try:
+            connection = connect_to_database()
+            with connection.cursor() as cursor:
+                # Search for books by title, author, or ISBN
+                cursor.execute("SELECT * FROM books WHERE title LIKE %s OR author LIKE %s OR isbn LIKE %s", 
+                               ('%' + search_query + '%', '%' + search_query + '%', '%' + search_query + '%'))
+                books = cursor.fetchall()
+            connection.close()
+            return render_template('index.html', books=books, search_query=search_query)
+        except Exception as e:
+            return f"An error occurred: {e}"
+    else:
+        try:
+            connection = connect_to_database()
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT * FROM books")
+                books = cursor.fetchall()
+            connection.close()
+            return render_template('index.html', books=books, search_query='')
+        except Exception as e:
+            return f"An error occurred: {e}"
 
 # Route to add a new book
 @app.route('/add_book', methods=['GET', 'POST'])
